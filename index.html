@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Konversi Suhu</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <span>Konversi Suhu</span>
+      </div>
+
+      <!-- Suhu Wrapper -->
+      <div class="suhu">
+        <div class="suhu-wrapper">
+          <div class="h9 mb-50">
+            <select name="from" id="from" onchange="select()">
+              <option value="C">Celcius</option>
+              <option value="F">Farenheit</option>
+              <option value="R">Reamur</option>
+            </select>
+            to
+            <select name="to" id="to" onchange="select()">
+              <option value="C">Celcius</option>
+              <option value="F">Farenheit</option>
+              <option value="R">Reamur</option>
+            </select>
+          </div>
+
+          <!-- Form Input 1 -->
+          <div class="form-1">
+            <p class="nilai">Masukan Nilai</p>
+            <input type="number" name="kmh" id="num1" class="form-input " placeholder="0" onkeypress="validate(event)" onkeyup="conv()" />
+          </div>
+
+          <!-- Form Input 2 -->
+          <div class="form-2">
+            <p class="hasil">Hasil</p>
+            <input type="number" id="result" class="form-input " placeholder="0" />
+          </div>
+        </div>
+
+        <div class="change-bg">
+          <span>Change Background Color</span><br>
+          <input class="form-control" id="color" placeholder="Masukan warna" />
+          <button type="button" class="change-btn" onclick="change()">Change</button>
+        </div>
+
+        <div class="button-suhu">
+          <span value="1">1</span>
+          <span value="2">2</span>
+          <span value="3">3</span>
+          <span value="pm">
+            <img src="/img/plus_minus.png" style="width: 40%; filter: invert(1)" />
+          </span>
+          <span value="c">AC</span>
+          <span value="4">4</span>
+          <span value="5">5</span>
+          <span value="6">6</span>
+          <span value="del">
+            <img src="/img/backspace-fill.svg" style="width: 20%; filter: invert(1)" />
+          </span>
+          <span value="7">7</span>
+          <span value="8">8</span>
+          <span value="9">9</span>
+          <span value="0">0</span>
+          <span value="." style="font-size: 2.5em">.</span>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./Main.js"></script>
+  <script>
+    function select() {
+      document.getElementById("num1").value = "";
+      document.getElementById("result").value = "";
+    }
+
+    const convert = new Convert();
+    function conv() {
+      if (document.getElementById("from").value == "C") {
+        const res = convert.fromCelcius(document.getElementById("to").value, parseInt(document.getElementById("num1").value));
+        document.getElementById("result").value = res;
+      }
+      if (document.getElementById("from").value == "R") {
+        const res = convert.fromReamur(document.getElementById("to").value, parseInt(document.getElementById("num1").value));
+        document.getElementById("result").value = res;
+      }
+      if (document.getElementById("from").value == "F") {
+        const res = convert.fromFarenheit(document.getElementById("to").value, parseInt(document.getElementById("num1").value));
+        document.getElementById("result").value = res;
+      }
+    }
+    function change() {
+      document.body.style.backgroundColor = document.getElementById("color").value;
+    }
+  </script>
+</html>
